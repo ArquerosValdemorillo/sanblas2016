@@ -1,0 +1,13 @@
+{
+  "server": {
+    "port": 8080
+  },
+  "db": {
+    "host": "",
+    "port": "3306",
+    "user": "",
+    "passwd": "",
+    "schema": "sanblas2016"
+  },
+  "debug": false
+}

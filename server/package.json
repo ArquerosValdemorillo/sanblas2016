@@ -1,0 +1,36 @@
+{
+  "name": "Xtreamer_Publisher",
+  "version": "0.1.0",
+  "author": "Ferimer Dev Team",
+  "description": "Xtreamer Publisher Server",
+  "contributors": [
+    {
+      "name": "Ferimer Dev Team",
+      "email": "devteam@ferimer.es"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@git.ferimer.es:/clientes/telefonica_uk/fanvox_Websocket"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "keywords": [],
+  "dependencies": {
+    "mysql": "^2.9.0",
+    "promise": "^7.1.1",
+    "restapi": "ferimer/restapi#6482f4d9dbc20cf03b59f000cd32faae289dd9d8"
+  },
+  "engines": {
+    "node": "~4.2.1"
+  },
+  "license": {
+    "type": "GNU Affero General Public License",
+    "url": "http://www.gnu.org/licenses/agpl-3.0.html"
+  },
+  "scripts": {
+    "start": "node main.js",
+    "debug": "node-debug main.js"
+  }
+}

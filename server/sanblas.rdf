@@ -1,0 +1,77 @@
+{
+  "rdf": 1,
+  "name": "Torneo de San Blas 2016 REST API",
+  "authors": "Ferimer, Servicios Informáticos",
+  "version": 0.1,
+  "description": "This API allows access to San Blas 2016",
+
+  "endpoint": {
+    "basePath": "sanblas",
+    "versions": [ "v1" ]
+  },
+
+  "common": {
+    "options": {},
+    "cors": {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": "true",
+      "Access-Control-Allow-Methods": "GET, OPTIONS",
+      "Access-Control-Allow-Headers": "x-requested-with, Content-Type, origin, authorization, accept, client-security-token",
+      "Access-Control-Expose-Headers": "Location"
+    },
+    "head": {},
+    "responses": {
+      "200": {},
+      "400": {
+        "data": { "error": "Bad request" }
+      },
+      "404": {
+        "data": { "error": "Resource not found" }
+      },
+      "503": {
+        "data": { "error": "Service unavailable" }
+      }
+    }
+  },
+
+  "resources": {
+    "v1": {
+      
+      "arqueros": {
+        "description": "",
+        "cors": {
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+        },
+        "methods": {
+          "options": {},
+          "get": {
+            "description": ""
+          },
+          "post": {
+            "description": ""
+          }
+        }
+      },
+
+      "arqueros/:arquero_id": {
+        "description": "",
+        "cors": {
+          "Access-Control-Allow-Methods": "GET, PUT, DELETE, OPTIONS"
+        },
+        "methods": {
+          "options": {},
+          "get": {
+            "description": "Receives OAuth2 user code"
+          },
+          "put": {
+            "description": ""
+          },
+          "delete": {
+            "description": ""
+          }
+        }
+      }
+
+    }
+  }
+}
