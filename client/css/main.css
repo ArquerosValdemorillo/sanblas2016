@@ -1,0 +1,69 @@
+
+body {
+  margin: 0;
+}
+
+.anipersiana {
+  transition: height 2s ease-out;
+}
+
+#toolbar {
+  position: absolute;
+  background-color: red;
+  height: 2px;
+  width: 100%;
+  z-index: 10;
+}
+#toolbar button {
+  visibility: hidden;
+}
+#toolbar:hover {
+  height: 50px;
+  padding: 10px;
+  width: calc(100% - 20px);
+}
+#toolbar:hover button {
+  visibility: visible;
+}
+
+section {
+  width: 95%;
+  display: block;
+  position: relative;
+  top: 20px;
+  margin: auto;
+}
+
+form button,
+progress {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.view {
+  display: none;
+}
+.view:target {
+  display: block;
+
+  padding: 10px;
+  background-color: white;
+  border: solid 2px red;
+}
+
+#main {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: grey;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: right;
+  font-size: 12px;
+}
