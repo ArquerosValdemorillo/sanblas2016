@@ -8,8 +8,8 @@ var endpoints = {
 var arqueros = [];
 
 window.onload = function() {
-  document.getElementById('import').onclick = function() {
-    location.hash = 'importView';
+  document.getElementById('bbdd').onclick = function() {
+    location.hash = 'bbddView';
   };
   document.getElementById('set').onclick = function() {
     location.hash = 'setView';
@@ -61,4 +61,8 @@ function loadArqueros(force) {
 
     xhr.send();
   }
+}
+
+function debugArqueros(element) {
+  element.textContent = JSON.stringify(arqueros, null, ' ');
 }

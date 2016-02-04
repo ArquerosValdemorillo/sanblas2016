@@ -11,18 +11,32 @@
 
   <body bgcolor="#FFFFFF">
     <div id="toolbar" class="anipersiana">
-      <button id="import">Importar XLSX (arqueros)</button>
+      <button id="bbdd">BBDD</button>
       <button id="set">Asignar resultados</button>
       <button id="viewResults">Ver resultados</button>
     </div>
     <div id="main">
-      <section id="importView" class="view">
+      <section id="bbddView" class="view">
         <form method="post">
+          <h2>Cargar hoja Excel</h2>
           <label for="hojaArqueros">Hoja Excel a cargar:</label>
           <input id="hojaArqueros" type="file" name="hojaArqueros"></input>
           <button type="submit" onclick="return sendForm(this.form)">Cargar</button>
+          <progress min="0" max="100" value="0">0% completado</progress>
         </form>
-        <progress min="0" max="100" value="0">0% completado</progress>
+        <form>
+          <h2>Cargar datos del servidor</h2>
+          <button type="submit" onclick="return loadArqueros(true)">Cargar</button>
+        </form>
+        <form>
+          <h2>Guardar resultados en el servidor</h2>
+          <button type="submit" onclick="return alert('to-do')">Guardar</button>
+        </form>
+        <form>
+          <h2>Ver contenido local</h2>
+          <pre id='debugData'></pre>
+          <button type="submit" onclick="return debugArqueros(debugData)">Mostrar datos locales</button>
+        </form>
       </section>
       <section id="setView" class="view">
         set
