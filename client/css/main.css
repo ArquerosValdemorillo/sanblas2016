@@ -9,7 +9,8 @@ body {
 }
 
 #toolbar {
-  position: absolute;
+  position: fixed;
+  top: 0;
   background-color: red;
   height: 2px;
   width: 100%;
