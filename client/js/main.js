@@ -135,6 +135,8 @@ function updateResultados() {
   var contenedor = document.getElementById('viewResultsView');
   contenedor.innerHTML = '';
   contenedor.appendChild(table);
+
+  location.hash = 'viewResultsView';
 }
 
 function updateScore(licencia) {
