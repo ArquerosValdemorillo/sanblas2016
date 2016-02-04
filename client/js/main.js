@@ -1,7 +1,7 @@
 
 var endpoints = {
-  hostProd: 'http://sanblas.arquerosvaldemorillo.es',
-  host: 'http://localhost:8080',
+  host: 'http://sanblas.arquerosvaldemorillo.es',
+  hostDev: 'http://localhost:8080',
   arqueros: '/sanblas/v1/arqueros'
 };
 
