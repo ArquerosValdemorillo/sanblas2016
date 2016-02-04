@@ -44,14 +44,18 @@ function sendForm(form) {
 }
 
 function loadArqueros(force) {
-  arqueros = localStorage.getItem('sanblas');
+  try {
+    arqueros = JSON.parse(localStorage.getItem('sanblas'));
+  } catch(e) {
+    arqueros = null;
+  }
 
-  if (!arqueros || force === true) {
+  if (Array.isArray(arqueros) === false || force === true) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', endpoints.host + endpoints.arqueros, true);
     xhr.responseType = 'json';
     xhr.onload = function(e) {
-      localStorage.setItem('sanblas', this.response);
+      localStorage.setItem('sanblas', JSON.stringify(this.response));
       arqueros = this.response;
     };
 
