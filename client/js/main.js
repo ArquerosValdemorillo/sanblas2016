@@ -2,8 +2,10 @@
 var endpoints = {
   hostProd: 'http://sanblas.arquerosvaldemorillo.es',
   host: 'http://localhost:8080',
-  upload: '/sanblas/v1/arqueros'
+  arqueros: '/sanblas/v1/arqueros'
 };
+
+var arqueros = [];
 
 window.onload = function() {
   document.getElementById('import').onclick = function() {
@@ -15,15 +17,17 @@ window.onload = function() {
   document.getElementById('viewResults').onclick = function() {
     location.hash = 'viewResultsView';
   };
+
+  setTimeout(loadArqueros);
 };
 
 function sendForm(form) {
   var formData = new FormData(form);
 
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', endpoints.host + endpoints.upload, true);
+  xhr.open('POST', endpoints.host + endpoints.arqueros, true);
   xhr.onload = function(e) {
-    console.log(this.response);
+    setTimeout(() => loadArqueros(true));
   };
 
   var progressBar = document.querySelector('progress');
@@ -37,4 +41,20 @@ function sendForm(form) {
   xhr.send(formData);
 
   return false; // Prevent page from submitting.
+}
+
+function loadArqueros(force) {
+  arqueros = localStorage.getItem('sanblas');
+
+  if (!arqueros || force === true) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', endpoints.host + endpoints.arqueros, true);
+    xhr.responseType = 'json';
+    xhr.onload = function(e) {
+      localStorage.setItem('sanblas', this.response);
+      arqueros = this.response;
+    };
+
+    xhr.send();
+  }
 }

@@ -3,6 +3,9 @@
 
 'use strict'
 
+var fs = require('fs'),
+    parser = require('../lib/parseHojaArqueros');
+
 module.exports = {
   GETArqueros: function(req, res, params, cb) {
     global.database.arqueros.getAll()
@@ -14,8 +17,14 @@ module.exports = {
   },
 
   POSTArqueros: function(req, res, params, cb) {
-    console.log(JSON.stringify(params.getAll()));
-    cb();
+    var hoja = params.get('hojaArqueros'),
+        arqueros = parser(hoja.path);
+    fs.unlink(hoja.path);
+
+    global.database.arqueros.saveAll(arqueros).then(() => {
+      res.writeHead(204);
+      cb();
+    });
   },
 
   GETArquero: function(req, res, params, cb) {
@@ -32,6 +41,11 @@ module.exports = {
   },
 
   DELETEArquero: function(req, res, params, cb) {
+    cb();
+  },
+
+  OPTIONS: function(req, res, params, cb) {
+    res.writeHead(200);
     cb();
   }
 

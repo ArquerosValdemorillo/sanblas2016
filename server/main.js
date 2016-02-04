@@ -48,5 +48,8 @@ global.database.connect(function() {
   server['GET sanblas/v1/arqueros/:arquero_id'] = api.arqueros.GETArquero;
   server['PUT sanblas/v1/arqueros/:arquero_id'] = api.arqueros.PUTArquero;
   server['DELETE sanblas/v1/arqueros/:arquero_id'] = api.arqueros.DELETEArquero;
+
+  server['OPTIONS sanblas/v1/arqueros'] = api.arqueros.OPTIONS;
+  server['OPTIONS sanblas/v1/arqueros/:arquero_id'] = api.arqueros.OPTIONS;
   // EOF Wiring
 });

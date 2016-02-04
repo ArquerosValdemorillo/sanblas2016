@@ -48,7 +48,10 @@
             "description": ""
           },
           "post": {
-            "description": ""
+            "description": "",
+            "params": {
+              "hojaArqueros": "file"
+            }
           }
         }
       },

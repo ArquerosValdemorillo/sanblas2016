@@ -46,7 +46,8 @@ module.exports = function parser(hoja) {
         linea: data[lineaTiro][col] || '',
         nombre: data[nombreArquero][col] || '',
         club: data[clubArquero][col] || '',
-        licencia: data[licencia][col] || ''
+        licencia: data[licencia][col] || '',
+        diana: ''
       });
     }
   });

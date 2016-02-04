@@ -77,6 +77,35 @@ module.exports = function DBManager(config) {
     },
 
     arqueros: {
+      saveAll: function(arqueros) {
+        var queries = [];
+        arqueros.forEach(arquero => {
+          if (arquero.licencia && Number.isInteger(arquero.licencia)) {
+            queries.push(query('INSERT INTO arqueros SET' +
+              ' id=' + arquero.licencia + ',' +
+              ' Nombre="' + (arquero.nombre || '') + '",' +
+              ' Club="' + (arquero.club || '') + '",' +
+              ' Licencia=' + (arquero.licencia || '') + ',' +
+              ' Parapeto="' + (arquero.parapeto || '') + '",' +
+              ' Diana="' + (arquero.diana || '') + '",' +
+              ' Linea="' + (arquero.linea || '') + '",' +
+              ' Modalidad="' + (arquero.tipoArco || '') + '",' +
+              ' Genero="' + (arquero.genero || '') + '",' +
+              ' Ronda1=0, Ronda2=0' +
+              ' ON DUPLICATE KEY UPDATE ' +
+              ' Nombre="' + (arquero.nombre || '') + '",' +
+              ' Club="' + (arquero.club || '') + '",' +
+              ' Parapeto="' + (arquero.parapeto || '') + '",' +
+              ' Diana="' + (arquero.diana || '') + '",' +
+              ' Linea="' + (arquero.linea || '') + '",' +
+              ' Modalidad="' + (arquero.tipoArco || '') + '",' +
+              ' Genero="' + (arquero.genero || '') + '"'
+            ));
+          }
+        });
+        return Promise.all(queries);
+      },
+
       getAll: function() {
         return query('SELECT * FROM arqueros');
       },
