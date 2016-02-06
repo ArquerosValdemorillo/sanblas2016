@@ -138,7 +138,7 @@ function mostrarResultados() {
     tr.appendChild(td);
 
     td = document.createElement('td');
-    td.textContent = arquero.Nombre + '(' + arquero.Licencia + ')';
+    td.textContent = arquero.Nombre + ' (' + arquero.Licencia + ')';
     tr.appendChild(td);
 
     td = document.createElement('td');
