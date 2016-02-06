@@ -74,9 +74,15 @@ progress {
 footer {
   position: fixed;
   bottom: 0;
-  width: 100%;
   text-align: right;
-  font-size: 12px;
+  font-size: 15px;
+  right: -225px;
+  transition: right 2s ease-in, background-color 2s ease-in;
+}
+
+footer:hover {
+  right: 0px;
+  background-color: white;
 }
 
 table {
