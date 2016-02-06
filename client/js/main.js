@@ -74,10 +74,10 @@ function updateResultados() {
 
   var tr = document.createElement('tr'),
       th = document.createElement('th');
-  th.textContent = 'Arquero';
+  th.textContent = '';
   tr.appendChild(th);
   th = document.createElement('th');
-  th.textContent = 'Licencia';
+  th.textContent = 'Arquero';
   tr.appendChild(th);
   th = document.createElement('th');
   th.textContent = 'Club';
@@ -86,22 +86,32 @@ function updateResultados() {
   th.textContent = 'Ronda 1';
   tr.appendChild(th);
   th = document.createElement('th');
+  th.textContent = 'X';
+  tr.appendChild(th);
+  th = document.createElement('th');
   th.textContent = 'Ronda 2';
   tr.appendChild(th);
   th = document.createElement('th');
+  th.textContent = 'X';
+  tr.appendChild(th);
+  th = document.createElement('th');
   th.textContent = 'Total';
+  tr.appendChild(th);
+  th = document.createElement('th');
+  th.textContent = 'X';
   tr.appendChild(th);
   table.appendChild(tr);
 
   arqueros.forEach(arquero => {
     tr = document.createElement('tr');
+    tr.class
 
     var td = document.createElement('td');
-    td.textContent = arquero.Nombre;
+    td.textContent = arquero.Linea + arquero.Diana;
     tr.appendChild(td);
 
     td = document.createElement('td');
-    td.textContent = arquero.Licencia;
+    td.textContent = arquero.Nombre + '(' + arquero.Licencia + ')';
     tr.appendChild(td);
 
     td = document.createElement('td');
@@ -116,6 +126,13 @@ function updateResultados() {
     tr.appendChild(td);
 
     td = document.createElement('td');
+    td.textContent = arquero.X1;
+    td.contentEditable = true;
+    td.id = arquero.Licencia + '_X1';
+    td.addEventListener('input', () => updateScore(arquero.Licencia));
+    tr.appendChild(td);
+
+    td = document.createElement('td');
     td.textContent = arquero.Ronda2;
     td.contentEditable = true;
     td.id = arquero.Licencia + '_Ronda2';
@@ -123,7 +140,18 @@ function updateResultados() {
     tr.appendChild(td);
 
     td = document.createElement('td');
+    td.textContent = arquero.X2;
+    td.contentEditable = true;
+    td.id = arquero.Licencia + '_X2';
+    td.addEventListener('input', () => updateScore(arquero.Licencia));
+    tr.appendChild(td);
+
+    td = document.createElement('td');
     td.id = arquero.Licencia + '_Total';
+    tr.appendChild(td);
+
+    td = document.createElement('td');
+    td.id = arquero.Licencia + '_XT';
     tr.appendChild(td);
     var lic = arquero.Licencia;
     setTimeout(() => refreshScore(lic));
@@ -150,9 +178,13 @@ function updateScore(licencia) {
 function refreshScore(licencia) {
   var R1 = document.getElementById(licencia + '_Ronda1'),
       R2 = document.getElementById(licencia + '_Ronda2'),
-      T = document.getElementById(licencia + '_Total');
+      T = document.getElementById(licencia + '_Total'),
+      X1 = document.getElementById(licencia + '_X1'),
+      X2 = document.getElementById(licencia + '_X2'),
+      XT = document.getElementById(licencia + '_XT');
 
   T.textContent = parseInt(R1.textContent) + parseInt(R2.textContent);
+  XT.textContent = parseInt(X1.textContent) + parseInt(X2.textContent);
 }
 
 function saveScores() {
@@ -162,6 +194,10 @@ function saveScores() {
         arquero.Licencia + '_Ronda1').textContent;
       arquero.Ronda2 = document.getElementById(
         arquero.Licencia + '_Ronda2').textContent;
+      arquero.X1 = document.getElementById(
+        arquero.Licencia + '_X1').textContent;
+      arquero.X2 = document.getElementById(
+        arquero.Licencia + '_X2').textContent;
     });
 
     localStorage.setItem('sanblas', JSON.stringify(arqueros));
