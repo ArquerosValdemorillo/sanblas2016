@@ -157,6 +157,7 @@ function mostrarResultados() {
     td.contentEditable = true;
     td.id = arquero.Licencia + '_X1';
     td.addEventListener('input', () => updateScore(arquero.Licencia));
+    td.classList.add('X');
     tr.appendChild(td);
 
     td = document.createElement('td');
@@ -171,14 +172,18 @@ function mostrarResultados() {
     td.contentEditable = true;
     td.id = arquero.Licencia + '_X2';
     td.addEventListener('input', () => updateScore(arquero.Licencia));
+    td.classList.add('X');
     tr.appendChild(td);
 
     td = document.createElement('td');
     td.id = arquero.Licencia + '_Total';
+    td.classList.add('Total');
     tr.appendChild(td);
 
     td = document.createElement('td');
     td.id = arquero.Licencia + '_XT';
+    td.classList.add('X');
+    td.classList.add('Total');
     tr.appendChild(td);
     var lic = arquero.Licencia;
     setTimeout(() => refreshScore(lic));

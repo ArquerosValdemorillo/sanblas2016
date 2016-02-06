@@ -97,6 +97,14 @@ table tr.par {
   background-color: lightblue;
 }
 
+table td.X {
+  color: red;
+}
+
+table td.Total {
+  font-weight: bold;
+}
+
 .view table {
   font-size: 20px;
 }
