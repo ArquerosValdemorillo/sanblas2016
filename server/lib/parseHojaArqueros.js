@@ -7,6 +7,7 @@ var xlsx = require('node-xlsx');
 
 // Filas en las que se encuentra la información
 var parapetoNum = 2,
+    diana = 3,
     lineaTiro = 4,
     tipoArco = 5,
     genero = 6,
@@ -47,7 +48,7 @@ module.exports = function parser(hoja) {
         nombre: data[nombreArquero][col] || '',
         club: data[clubArquero][col] || '',
         licencia: data[licencia][col] || '',
-        diana: ''
+        diana: data[diana][col] || ''
       });
     }
   });

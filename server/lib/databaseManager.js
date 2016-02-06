@@ -91,7 +91,7 @@ module.exports = function DBManager(config) {
               ' Linea="' + (arquero.linea || '') + '",' +
               ' Modalidad="' + (arquero.tipoArco || '') + '",' +
               ' Genero="' + (arquero.genero || '') + '",' +
-              ' Ronda1=0, Ronda2=0' +
+              ' Ronda1=0, X1=0, Ronda2=0, X2=0' +
               ' ON DUPLICATE KEY UPDATE ' +
               ' Nombre="' + (arquero.nombre || '') + '",' +
               ' Club="' + (arquero.club || '') + '",' +
