@@ -12,9 +12,8 @@ window.onload = function() {
   document.getElementById('bbdd').onclick = function() {
     location.hash = 'bbddView';
   };
-  document.getElementById('viewResults').onclick = function() {
-    location.hash = 'viewResultsView';
-  };
+  document.getElementById('editResults').onclick = ordenarPorLinea;
+  document.getElementById('viewResults').onclick = ordenarPorResultados;
 
   setTimeout(loadArqueros);
 };
@@ -49,18 +48,19 @@ function loadArqueros(force) {
   }
 
   if (Array.isArray(arqueros) === false || force === true) {
+    console.log('Recuperamos datos del servidor');
     var xhr = new XMLHttpRequest();
     xhr.open('GET', endpoints.host + endpoints.arqueros, true);
     xhr.responseType = 'json';
     xhr.onload = function(e) {
-      localStorage.setItem('sanblas', JSON.stringify(this.response));
       arqueros = this.response;
-      updateResultados();
+      ordenarPorLinea();
     };
 
     xhr.send();
   } else {
-    updateResultados();
+    console.log('Recuperamos caché local');
+    mostrarResultados();
   }
 }
 
@@ -68,7 +68,34 @@ function debugArqueros(element) {
   element.textContent = JSON.stringify(arqueros, null, ' ');
 }
 
-function updateResultados() {
+function ordenarPorLinea() {
+  console.log('Ordenamos por linea + diana');
+  saveScores();
+  arqueros = arqueros.sort((a, b) => {
+    return (a.Linea == b.Linea ? a.Diana > b.Diana : a.Linea > b.Linea);
+  });
+  localStorage.setItem('sanblas', JSON.stringify(arqueros));
+  mostrarResultados();
+  location.hash = 'viewResultsView';
+}
+
+function ordenarPorResultados() {
+  console.log('Ordenamos por puntos');
+  // Ordenamos por puntos totales
+  saveScores();
+  arqueros = arqueros.sort((a, b) => {
+    var puntosA = a.Ronda1 + a.Ronda2,
+        puntosB = b.Ronda1 + b.Ronda2,
+        XA = a.X1 + a.X2,
+        XB = b.X1 + b.X2;
+    return (puntosA == puntosB ? XA < XB : puntosA < puntosB);
+  });
+  localStorage.setItem('sanblas', JSON.stringify(arqueros));
+  mostrarResultados();
+  location.hash = 'viewResultsView';
+}
+
+function mostrarResultados() {
   // Prepare table
   var table = document.createElement('table');
 
@@ -104,7 +131,6 @@ function updateResultados() {
 
   arqueros.forEach(arquero => {
     tr = document.createElement('tr');
-    tr.class
 
     var td = document.createElement('td');
     td.textContent = arquero.Linea + arquero.Diana;
@@ -190,14 +216,14 @@ function refreshScore(licencia) {
 function saveScores() {
   if (scoreUpdated) {
     arqueros.forEach(arquero => {
-      arquero.Ronda1 = document.getElementById(
-        arquero.Licencia + '_Ronda1').textContent;
-      arquero.Ronda2 = document.getElementById(
-        arquero.Licencia + '_Ronda2').textContent;
-      arquero.X1 = document.getElementById(
-        arquero.Licencia + '_X1').textContent;
-      arquero.X2 = document.getElementById(
-        arquero.Licencia + '_X2').textContent;
+      arquero.Ronda1 = parseInt(document.getElementById(
+        arquero.Licencia + '_Ronda1').textContent);
+      arquero.Ronda2 = parseInt(document.getElementById(
+        arquero.Licencia + '_Ronda2').textContent);
+      arquero.X1 = parseInt(document.getElementById(
+        arquero.Licencia + '_X1').textContent);
+      arquero.X2 = parseInt(document.getElementById(
+        arquero.Licencia + '_X2').textContent);
     });
 
     localStorage.setItem('sanblas', JSON.stringify(arqueros));
