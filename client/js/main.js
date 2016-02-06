@@ -129,6 +129,7 @@ function mostrarResultados() {
   tr.appendChild(th);
   table.appendChild(tr);
 
+  var fila = 1;
   arqueros.forEach(arquero => {
     tr = document.createElement('tr');
 
@@ -182,6 +183,7 @@ function mostrarResultados() {
     var lic = arquero.Licencia;
     setTimeout(() => refreshScore(lic));
 
+    tr.classList.add( (fila++ % 2 === 0 ? 'par' : 'impar') );
     table.appendChild(tr);
   });
 

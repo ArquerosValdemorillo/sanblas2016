@@ -93,6 +93,10 @@ table th {
   background-color: red;
 }
 
+table tr.par {
+  background-color: lightblue;
+}
+
 .view table {
   font-size: 20px;
 }
