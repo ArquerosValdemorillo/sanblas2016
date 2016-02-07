@@ -108,3 +108,18 @@ table td.Total {
 .view table {
   font-size: 20px;
 }
+
+#viewResultsView ul {
+  list-style: none;
+  padding: 0;
+}
+#viewResultsView ul li {
+  display: inline-block;
+  padding: 4px;
+  background-color: lightblue;
+  margin-right: 5px;
+  cursor: pointer;
+}
+#viewResultsView ul li.active {
+  background-color: lightyellow;
+}

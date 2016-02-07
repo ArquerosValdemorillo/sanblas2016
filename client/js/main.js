@@ -95,43 +95,46 @@ function ordenarPorResultados() {
   location.hash = 'viewResultsView';
 }
 
-function mostrarResultados() {
-  // Prepare table
-  var table = document.createElement('table');
+function mostrarResultados(filtro) {
+  function creaCabecera() {
+    // Prepare table
+    var table = document.createElement('table');
 
-  var tr = document.createElement('tr'),
-      th = document.createElement('th');
-  th.textContent = '';
-  tr.appendChild(th);
-  th = document.createElement('th');
-  th.textContent = 'Arquero';
-  tr.appendChild(th);
-  th = document.createElement('th');
-  th.textContent = 'Club';
-  tr.appendChild(th);
-  th = document.createElement('th');
-  th.textContent = 'Ronda 1';
-  tr.appendChild(th);
-  th = document.createElement('th');
-  th.textContent = 'X';
-  tr.appendChild(th);
-  th = document.createElement('th');
-  th.textContent = 'Ronda 2';
-  tr.appendChild(th);
-  th = document.createElement('th');
-  th.textContent = 'X';
-  tr.appendChild(th);
-  th = document.createElement('th');
-  th.textContent = 'Total';
-  tr.appendChild(th);
-  th = document.createElement('th');
-  th.textContent = 'X';
-  tr.appendChild(th);
-  table.appendChild(tr);
+    var tr = document.createElement('tr'),
+        th = document.createElement('th');
+    th.textContent = '';
+    tr.appendChild(th);
+    th = document.createElement('th');
+    th.textContent = 'Arquero';
+    tr.appendChild(th);
+    th = document.createElement('th');
+    th.textContent = 'Club';
+    tr.appendChild(th);
+    th = document.createElement('th');
+    th.textContent = 'Ronda 1';
+    tr.appendChild(th);
+    th = document.createElement('th');
+    th.textContent = 'X';
+    tr.appendChild(th);
+    th = document.createElement('th');
+    th.textContent = 'Ronda 2';
+    tr.appendChild(th);
+    th = document.createElement('th');
+    th.textContent = 'X';
+    tr.appendChild(th);
+    th = document.createElement('th');
+    th.textContent = 'Total';
+    tr.appendChild(th);
+    th = document.createElement('th');
+    th.textContent = 'X';
+    tr.appendChild(th);
+    table.appendChild(tr);
 
+    return table;
+  }
   var fila = 1;
-  arqueros.forEach(arquero => {
-    tr = document.createElement('tr');
+  function addArquero(arquero) {
+    var tr = document.createElement('tr');
 
     var td = document.createElement('td');
     td.textContent = arquero.Linea + arquero.Diana;
@@ -189,12 +192,42 @@ function mostrarResultados() {
     setTimeout(() => refreshScore(lic));
 
     tr.classList.add( (fila++ % 2 === 0 ? 'par' : 'impar') );
-    table.appendChild(tr);
+
+    return tr;
+  }
+
+  var table = creaCabecera();
+  arqueros.forEach(arquero => {
+    if (filtro !== undefined) {
+      if(arquero.Modalidad !== filtro)
+        return;
+    }
+    table.appendChild(addArquero(arquero));
   });
 
   // Update UI
   var contenedor = document.getElementById('viewResultsView');
   contenedor.innerHTML = '';
+
+  var ul = document.createElement('ul');
+  var li = document.createElement('li');
+  li.textContent = 'TODOS';
+  li.onclick = () => mostrarResultados();
+  if (filtro === undefined) {
+    li.classList.add('active');
+  }
+  ul.appendChild(li);
+  obtenerModalidades().forEach(modalidad => {
+    li = document.createElement('li');
+    li.textContent = modalidad;
+    li.onclick = () => mostrarResultados(modalidad);
+    if (filtro === modalidad) {
+      li.classList.add('active');
+    }
+    ul.appendChild(li);
+  });
+
+  contenedor.appendChild(ul);
   contenedor.appendChild(table);
 
   location.hash = 'viewResultsView';
@@ -216,6 +249,9 @@ function refreshScore(licencia) {
       X2 = document.getElementById(licencia + '_X2'),
       XT = document.getElementById(licencia + '_XT');
 
+  if (R1 === null || R2 === null || X1 === null || X2 === null) {
+    return;
+  }
   T.textContent = parseInt(R1.textContent) + parseInt(R2.textContent);
   XT.textContent = parseInt(X1.textContent) + parseInt(X2.textContent);
 }
@@ -237,4 +273,11 @@ function saveScores() {
     scoreUpdated = false;
     console.log('Scores updated !');
   }
+}
+
+function obtenerModalidades() {
+  var modalidades = arqueros.map(arquero => arquero.Modalidad);
+  return modalidades.filter((item, pos) => {
+    return modalidades.indexOf(item) == pos;
+  });
 }
