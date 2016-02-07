@@ -1,4 +1,3 @@
-// 4G Xtreamer Server
 // (c) 2016, Ferimer
 
 'use strict';
@@ -7,7 +6,9 @@ var mysql = require('mysql'),
     Promise = require('promise');
 
 module.exports = function DBManager(config) {
-  var cfg = config;
+  var cfg = config,
+      isConnected = false;
+
   // Promises
   var Query = null; 
 
@@ -33,10 +34,19 @@ module.exports = function DBManager(config) {
 
   function _connect(onConnect) {
     dbServer.on('error', function(err) {
-      console.log('Database error: ' + err.code);
-      process.exit(1);
+      if (err.fatal) {
+        if (err.code == 'PROTOCOL_CONNECTION_LOST') {
+          console.log('Disconnected from database');
+          isConnected = false;
+        } else {
+          console.error('Error in database. Unmanaged one: ' + err.code);
+          process.exit(1);
+        }
+      }
     });
+
     dbServer.on('connect', function() {
+      isConnected = true;
       // Convert to promises
       Query = Promise.denodeify(dbServer.query.bind(dbServer));
 
@@ -47,16 +57,24 @@ module.exports = function DBManager(config) {
   }
 
   function query(sql) {
-    // On DB Error dont reject or not informs client
     console.debug('SQL Query: ' + sql);
     if (!Query) {
       return Promise.reject("Not initialized!");
     }
+    if (!isConnected) {
+      console.log('Reconnecting to database ...');
+      return new Promise(function(resolve, reject) {
+        _connect(function() {
+          query(sql).then(resolve, reject);
+        });
+      });
+    }
+
     return Query(sql).then(function(d) {
-      return d;
+      return d || [];
     }, function(e) {
       console.debug('DB Error: ' + e);
-      return '';
+      return [];
     });
   }
 
