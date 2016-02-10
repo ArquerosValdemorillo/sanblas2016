@@ -107,7 +107,7 @@ module.exports = function DBManager(config) {
               ' Parapeto="' + (arquero.parapeto || '') + '",' +
               ' Diana="' + (arquero.diana || '') + '",' +
               ' Linea="' + (arquero.linea || '') + '",' +
-              ' Modalidad="' + (arquero.tipoArco || '') + '",' +
+              ' Modalidad="' + (arquero.modalidad || '') + '",' +
               ' Genero="' + (arquero.genero || '') + '",' +
               ' Ronda1=0, X1=0, Ronda2=0, X2=0' +
               ' ON DUPLICATE KEY UPDATE ' +
@@ -116,7 +116,7 @@ module.exports = function DBManager(config) {
               ' Parapeto="' + (arquero.parapeto || '') + '",' +
               ' Diana="' + (arquero.diana || '') + '",' +
               ' Linea="' + (arquero.linea || '') + '",' +
-              ' Modalidad="' + (arquero.tipoArco || '') + '",' +
+              ' Modalidad="' + (arquero.modalidad || '') + '",' +
               ' Genero="' + (arquero.genero || '') + '"'
             ));
           }
