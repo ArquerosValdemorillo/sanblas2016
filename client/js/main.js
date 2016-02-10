@@ -75,7 +75,7 @@ function ordenarPorLinea() {
   console.log('Ordenamos por linea + diana');
   saveScores();
   arqueros = arqueros.sort((a, b) => {
-    return (a.Linea == b.Linea ? a.Diana > b.Diana : a.Linea > b.Linea);
+    return a.Linea >= b.Linea;
   });
   localStorage.setItem('sanblas', JSON.stringify(arqueros));
   mostrarResultados();
@@ -140,7 +140,7 @@ function mostrarResultados(filtro) {
     var tr = document.createElement('tr');
 
     var td = document.createElement('td');
-    td.textContent = arquero.Linea + arquero.Diana;
+    td.textContent = arquero.Linea + ' - ' + arquero.Parapeto + arquero.Diana;
     tr.appendChild(td);
 
     td = document.createElement('td');
