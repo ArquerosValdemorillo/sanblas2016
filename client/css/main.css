@@ -5,7 +5,7 @@ body {
 }
 
 .anipersiana {
-  transition: height 2s ease-out;
+  transition: height 1s ease-out;
 }
 
 #toolbar {
@@ -21,7 +21,7 @@ body {
 #toolbar button {
   position: relative;
   top: -100px;
-  transition: top 2s ease-out;
+  transition: top 1s ease-out;
 }
 #toolbar:hover {
   height: 50px;
