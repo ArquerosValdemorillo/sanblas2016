@@ -123,3 +123,23 @@ table td.Total {
 #viewResultsView ul li.active {
   background-color: lightyellow;
 }
+
+@media print {
+  #viewResultsView {
+    display: block !important;
+  }
+  #viewResultsView ul li {
+    display: none;
+  }
+  #viewResultsView ul li.active {
+    display: block;
+    font-size: 20px;
+  }
+  #viewResultsView ul li.active:before {
+    content: "VIII Torneo de tiro con arco en sala - San Blas 2016 - ";
+  }
+  .view table {
+    font-size: 10px;
+  }
+}
+
