@@ -76,7 +76,7 @@ footer {
   bottom: 0;
   text-align: right;
   font-size: 15px;
-  right: -225px;
+  right: -290px;
   transition: right 2s ease-in, background-color 2s ease-in;
 }
 
@@ -149,6 +149,9 @@ table td p {
     font-size: 10px;
   }
   table td span.numero_linea {
+    display: none;
+  }
+  #toolbar, footer {
     display: none;
   }
 }
