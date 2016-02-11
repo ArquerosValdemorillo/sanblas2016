@@ -9,9 +9,6 @@ var arqueros = [],
     scoreUpdated = false;
 
 window.onload = function() {
-  var appCache = window.applicationCache;
-  appCache.update();
-
   document.getElementById('bbdd').onclick = function() {
     location.hash = 'bbddView';
   };
