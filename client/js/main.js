@@ -159,6 +159,8 @@ function mostrarResultados(filtro) {
     td.textContent = arquero.Ronda1;
     td.contentEditable = true;
     td.id = arquero.Licencia + '_Ronda1';
+    td.addEventListener('focus', () =>
+      document.execCommand('selectAll',false,null));
     td.addEventListener('input', () => updateScore(arquero.Licencia));
     tr.appendChild(td);
 
@@ -166,6 +168,8 @@ function mostrarResultados(filtro) {
     td.textContent = arquero.X1;
     td.contentEditable = true;
     td.id = arquero.Licencia + '_X1';
+    td.addEventListener('focus', () =>
+      document.execCommand('selectAll',false,null));
     td.addEventListener('input', () => updateScore(arquero.Licencia));
     td.classList.add('X');
     tr.appendChild(td);
@@ -174,6 +178,8 @@ function mostrarResultados(filtro) {
     td.textContent = arquero.Ronda2;
     td.contentEditable = true;
     td.id = arquero.Licencia + '_Ronda2';
+    td.addEventListener('focus', () =>
+      document.execCommand('selectAll',false,null));
     td.addEventListener('input', () => updateScore(arquero.Licencia));
     tr.appendChild(td);
 
@@ -181,6 +187,8 @@ function mostrarResultados(filtro) {
     td.textContent = arquero.X2;
     td.contentEditable = true;
     td.id = arquero.Licencia + '_X2';
+    td.addEventListener('focus', () =>
+      document.execCommand('selectAll',false,null));
     td.addEventListener('input', () => updateScore(arquero.Licencia));
     td.classList.add('X');
     tr.appendChild(td);
