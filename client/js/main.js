@@ -100,7 +100,8 @@ function mostrarResultados(filtro) {
     // Prepare table
     var table = document.createElement('table');
 
-    var tr = document.createElement('tr'),
+    var thead = document.createElement('thead'),
+        tr = document.createElement('tr'),
         th = document.createElement('th');
     th.textContent = '';
     tr.appendChild(th);
@@ -128,7 +129,8 @@ function mostrarResultados(filtro) {
     th = document.createElement('th');
     th.textContent = 'X';
     tr.appendChild(th);
-    table.appendChild(tr);
+    thead.appendChild(tr)
+    table.appendChild(thead);
 
     return table;
   }
@@ -211,14 +213,16 @@ function mostrarResultados(filtro) {
     return tr;
   }
 
-  var table = creaCabecera();
+  var table = creaCabecera(),
+      tbody = document.createElement('tbody');
   arqueros.forEach(arquero => {
     if (filtro !== undefined) {
       if(arquero.Modalidad !== filtro)
         return;
     }
-    table.appendChild(addArquero(arquero));
+    tbody.appendChild(addArquero(arquero));
   });
+  table.appendChild(tbody);
 
   // Update UI
   var contenedor = document.getElementById('viewResultsView');
