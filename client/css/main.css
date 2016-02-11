@@ -106,10 +106,12 @@ table td.Total {
 }
 
 table td span.numero_linea:after {
-  content: ' - ';
+  content: ' -';
+  margin-right: 4px;
 }
-table td p {
+table td span.numero_linea, table td p {
   display: inline-block;
+  margin: 0;
 }
 
 .view table {
