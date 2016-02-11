@@ -111,16 +111,16 @@ function mostrarResultados(filtro) {
     th.textContent = 'Club';
     tr.appendChild(th);
     th = document.createElement('th');
-    th.textContent = 'Ronda 1';
+    th.textContent = 'R1';
     tr.appendChild(th);
     th = document.createElement('th');
-    th.textContent = 'X';
+    th.textContent = 'X1';
     tr.appendChild(th);
     th = document.createElement('th');
-    th.textContent = 'Ronda 2';
+    th.textContent = 'R2';
     tr.appendChild(th);
     th = document.createElement('th');
-    th.textContent = 'X';
+    th.textContent = 'X2';
     tr.appendChild(th);
     th = document.createElement('th');
     th.textContent = 'Total';
@@ -137,7 +137,14 @@ function mostrarResultados(filtro) {
     var tr = document.createElement('tr');
 
     var td = document.createElement('td');
-    td.textContent = arquero.Linea + ' - ' + arquero.Parapeto + arquero.Diana;
+    var span = document.createElement('span');
+    span.classList.add('numero_linea');
+    span.textContent = arquero.Linea;
+    var p = document.createElement('p');
+    p.textContent = arquero.Linea;
+    p.textContent = arquero.Parapeto + arquero.Diana;
+    td.appendChild(span);
+    td.appendChild(p);
     tr.appendChild(td);
 
     td = document.createElement('td');

@@ -105,6 +105,13 @@ table td.Total {
   font-weight: bold;
 }
 
+table td span.numero_linea:after {
+  content: ' - ';
+}
+table td p {
+  display: inline-block;
+}
+
 .view table {
   font-size: 20px;
 }
@@ -140,6 +147,9 @@ table td.Total {
   }
   .view table {
     font-size: 10px;
+  }
+  table td span.numero_linea {
+    display: none;
   }
 }
 
